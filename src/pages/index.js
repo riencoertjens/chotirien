@@ -111,7 +111,7 @@ const Small = props => <Box as="span" {...props} sx={{ fontSize: "0.75em" }} />
 
 const Caption = ({ sx = {}, thai, english, small }) => (
   <Box
-    as="p"
+    as="div"
     sx={{
       my: 3,
       fontFamily: "english",
