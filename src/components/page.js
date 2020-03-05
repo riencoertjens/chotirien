@@ -6,25 +6,60 @@ import { Flex, Box } from "reflexbox"
 
 import SEO from "../components/seo"
 import theme from "../theme"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
+import Image from "gatsby-image"
+import { H1, H2 } from "./headings"
 
 export const Page = ({ language }) => {
+  const data = useStaticQuery(graphql`
+    {
+      shadows: file(base: { eq: "shadows.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
   return (
     <ThemeProvider theme={theme}>
       <Global
         styles={css`
           ${emotionReset}
+          line-height: 1.25;
+          font-family: ${theme.fonts.english};
         `}
       />
       <SEO />
+      <Image
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: "0",
+          left: "0",
+          zIndex: -1,
+          opacity: 0.25,
+        }}
+        fluid={data.shadows.childImageSharp.fluid}
+      />
+      <Section>
+        <Caption>together with their families</Caption>
+        <H1>
+          <span>Chotirat</span> <Small>&</Small> <span>Rien</span>
+        </H1>
+        <Caption>Invite you to celebrate their wedding</Caption>
+        <DateCaption>may 4th, 2020</DateCaption>
+      </Section>
       <Section>
         <Flex
           sx={{
-            position: "absolute",
+            position: "fixed",
+            background: "white",
             top: 2,
             right: 2,
             fontFamily: "thai",
-            color: "black",
             color: "grey",
             ".link": {
               textDecoration: "none",
@@ -36,7 +71,7 @@ export const Page = ({ language }) => {
           }}
         >
           <Link activeClassName="current" className="link" to="/thai">
-            🇹🇭
+            th
           </Link>
           /
           <Link activeClassName="current" className="link" to="/">
@@ -44,7 +79,7 @@ export const Page = ({ language }) => {
           </Link>
           /
           <Link activeClassName="current" className="link" to="/english">
-            🇬🇧
+            en
           </Link>
         </Flex>
         <Flex alignItems="center" flexDirection={["column", "row"]}>
@@ -60,7 +95,12 @@ export const Page = ({ language }) => {
               english="Mrs. Boonruan Jonggrit"
             />
           </Couple>
-          <Box mx={[4, 4, 5]}>และ</Box>
+          <Box
+            mx={[4, 4, 5]}
+            sx={{ fontFamily: language === "english" ? "english" : "thai" }}
+          >
+            {language === "english" ? "and" : "และ"}
+          </Box>
           <Couple>
             <Name
               language={language}
@@ -74,21 +114,21 @@ export const Page = ({ language }) => {
             />
           </Couple>
         </Flex>
-        <Caption
+        <MultiLangCaption
           language={language}
-          thai="มี ความยิ นดี ขอเรี ยนเชิ ญเพื่ อเป็ นเกี ยรติ ในงานเล้ี ยงฉลองเน่ื องในพิ ธี มงคลสมรส"
+          thai="มี ความยิ นดี ขอเรี ยนเชิ ญเพื่ อเป็ นเกี ยรติ ในงานเลี้ ยงฉลองเนื่ องในพิ ธี มงคลสมรส"
           english="Invite you to celebrate the marriage of"
         />
-        <H1>
+        <H2>
           <span>Chotirat</span> <Small>&</Small> <span>Rien</span>
-        </H1>
-        <Caption
+        </H2>
+        <MultiLangCaption
           small
           language={language}
           thai="นางสาวโชติรัตน์ จองกฤษ และ นายรีน โครเจียน"
           english="Chotirat Jonggrit & Rien Coertjens"
         />
-        <Caption
+        <MultiLangCaption
           small
           language={language}
           thai="วันจันทร์ที่ 4 พฤษภาคม พ.ศ. 2563"
@@ -100,7 +140,7 @@ export const Page = ({ language }) => {
             </>
           }
         />
-        <Caption
+        <MultiLangCaption
           small
           language={language}
           thai={
@@ -137,25 +177,24 @@ const Section = props => (
   />
 )
 
-const H1 = ({ sx = {}, ...props }) => (
+const Small = props => <Box as="span" {...props} sx={{ fontSize: "0.75em" }} />
+
+const Caption = ({ small, ...props }) => (
   <Box
-    as="h1"
+    as="p"
     sx={{
       fontFamily: "english",
-      fontSize: ["5rem", "7.5rem"],
-      fontWeight: 200,
-      textAlign: "center",
-      display: ["flex", "flex", "block"],
-      flexDirection: "column",
       my: 3,
-      ...sx,
+      fontSize: small ? "1rem" : "1.15rem",
+      fontWeight: 200,
+      fontStyle: "italic",
+      textAlign: "center",
     }}
     {...props}
   />
 )
-const Small = props => <Box as="span" {...props} sx={{ fontSize: "0.75em" }} />
 
-const Caption = ({ sx = {}, thai, english, small, language }) => (
+const MultiLangCaption = ({ sx = {}, thai, english, small, language }) => (
   <Box
     as="div"
     sx={{
@@ -164,6 +203,7 @@ const Caption = ({ sx = {}, thai, english, small, language }) => (
       fontSize: small ? "1rem" : "1.15rem",
       fontWeight: 400,
       textAlign: "center",
+      ...sx,
     }}
   >
     {(!language || language === "thai") && (
@@ -172,7 +212,13 @@ const Caption = ({ sx = {}, thai, english, small, language }) => (
       </Box>
     )}
     {(!language || language === "english") && (
-      <Box as="p" sx={{ fontFamily: "english", color: "grey" }}>
+      <Box
+        as="p"
+        sx={{
+          fontFamily: "english",
+          color: language === "english" ? "black" : "grey",
+        }}
+      >
         {english}
       </Box>
     )}
@@ -201,7 +247,14 @@ const Name = ({ thai, english, language }) => (
       </Box>
     )}
     {(!language || language === "english") && (
-      <Box as="span" sx={{ display: "block", color: "grey" }}>
+      <Box
+        as="span"
+        sx={{
+          display: "block",
+          fontFamily: "english",
+          color: language === "english" ? "black" : "grey",
+        }}
+      >
         {english}
       </Box>
     )}
