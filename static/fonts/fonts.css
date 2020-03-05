@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "IBMPlexThai";
+  src: url("IBMPlexSansThai-Regular.otf");
+}
+
+@font-face {
+  font-family: "WarnockPro";
+  font-weight: 400;
+  src: url("WarnockPro-Regular.otf");
+}
+@font-face {
+  font-family: "WarnockPro";
+  font-weight: 200;
+  src: url("WarnockPro-Light.otf");
+}
+@font-face {
+  font-family: "WarnockPro";
+  font-style: italic;
+  font-weight: 200;
+  src: url("WarnockPro-Light-Italic.otf");
+}
