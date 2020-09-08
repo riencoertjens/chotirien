@@ -58,10 +58,10 @@ export const Page = ({ language }) => {
         <MultiLangCaption
           small
           language={language}
-          thai="วันจันทร์ที่ 4 พฤษภาคม พ.ศ. 2563"
+          thai="วันอาทิตย์ที่ 1 พฤศจิกายน พ.ศ. 2563"
           english={
             <>
-              Monday, the fourth of May
+              Sunday, the first of November
               <br />
               Two thousand and twenty
             </>
