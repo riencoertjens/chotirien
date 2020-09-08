@@ -12,7 +12,7 @@ const EnglishPage = props => {
           <span>Chotirat</span> <Small>&</Small> <span>Rien</span>
         </H1>
         <Caption>Invite you to celebrate their wedding</Caption>
-        <DateCaption>may 4th, 2020</DateCaption>
+        <DateCaption>November 1st, 2020</DateCaption>
       </Section>
     </Layout>
   )
