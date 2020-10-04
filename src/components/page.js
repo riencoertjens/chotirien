@@ -84,22 +84,36 @@ export const Page = ({ language }) => {
         <Box
           sx={{
             fontFamily: "english",
-            letterSpacing: "5px",
             textAlign: "center",
             my: 32,
-            p: {
+            "p, a": {
               display: "inline-block",
-              mr: "-5px",
-              mb: "4px",
+              mb: "8px",
+              ".theme": {
+                letterSpacing: "5px",
+                mr: "-5px",
+              },
+            },
+            a: {
+              color: "#5C7757",
+              mt: "32px",
             },
           }}
         >
-          <p>THEME</p>
+          <p className="theme">THEME</p>
           <Flex>
             <ThemeColor color="#D5CFC9" />
             <ThemeColor color="#869D83" />
             <ThemeColor color="#5C7757" />
           </Flex>
+          <a
+            href="https://www.instagram.com/explore/tags/chotirien/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hashtag"
+          >
+            #chotirien
+          </a>
         </Box>
         <MultiLangSchedule
           small
