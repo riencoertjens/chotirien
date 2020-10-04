@@ -75,9 +75,7 @@ export const Page = ({ language }) => {
           }
           english={
             <>
-              Sunday, the first of November
-              <br />
-              Two thousand and twenty
+              Sunday, November 1st 2020
               <br />
               at Nana Beach Resort, Chumphon
             </>
