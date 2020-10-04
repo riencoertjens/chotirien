@@ -2,7 +2,15 @@ import React from "react"
 import { Flex, Box } from "reflexbox"
 
 import { H1 } from "./headings"
-import { Section, Name, MultiLangCaption, Couple, Small } from "."
+import {
+  Section,
+  Name,
+  MultiLangCaption,
+  MultiLangSchedule,
+  Couple,
+  Small,
+  ThemeColor,
+} from "."
 import { Layout } from "./layout"
 
 export const Page = ({ language }) => {
@@ -10,41 +18,42 @@ export const Page = ({ language }) => {
     <Layout>
       <Section>
         <Flex alignItems="center" flexDirection={["column", "row"]}>
-          <Couple>
-            <Name
-              language={language}
-              thai="นายบุญโชติ จองกฤษ"
-              english="Mr. Boonchote Jonggrit"
-            />
-            <Name
-              language={language}
-              thai="นางบุญเรือน จองกฤษ"
-              english="Mrs. Boonruan Jonggrit"
-            />
-          </Couple>
-          <Box
-            mx={[4, 4, 5]}
-            sx={{ fontFamily: language === "english" ? "english" : "thai" }}
-          >
-            {language === "english" ? "and" : "และ"}
-          </Box>
-          <Couple>
-            <Name
-              language={language}
-              thai="นายพอล โครเจียน"
-              english="Mr. Paul Coertjens"
-            />
-            <Name
-              language={language}
-              thai="นางอิงกริด อัลลาซ์"
-              english="Mrs. Ingrid Allaerts"
-            />
-          </Couple>
+          {(!language || language === "thai") && (
+            <>
+              <Couple>
+                <Name
+                  language={language}
+                  thai="นายบุญโชติ จองกฤษ"
+                  english="Mr. Boonchote Jonggrit"
+                />
+                <Name
+                  language={language}
+                  thai="นางบุญเรือน จองกฤษ"
+                  english="Mrs. Boonruan Jonggrit"
+                />
+              </Couple>
+              <Box mx={[4, 4, 5]} sx={{ fontFamily: "thai" }}>
+                และ
+              </Box>
+              <Couple>
+                <Name
+                  language={language}
+                  thai="นายพอล โครเจียน"
+                  english="Mr. Paul Coertjens"
+                />
+                <Name
+                  language={language}
+                  thai="นางอิงกริด อัลลาซ์"
+                  english="Mrs. Ingrid Allaerts"
+                />
+              </Couple>
+            </>
+          )}
         </Flex>
         <MultiLangCaption
           language={language}
           thai="มี ความยิ นดี ขอเรี ยนเชิ ญเพื่ อเป็ นเกี ยรติ ในงานเลี้ ยงฉลองเนื่ องในพิ ธี มงคลสมรส"
-          english="Invite you to celebrate the marriage of"
+          english="Together with our families, we would like to invite you to our wedding"
         />
         <H1>
           <span>Chotirat</span> <Small>&</Small> <span>Rien</span>
@@ -58,30 +67,65 @@ export const Page = ({ language }) => {
         <MultiLangCaption
           small
           language={language}
-          thai="วันอาทิตย์ที่ 1 พฤศจิกายน พ.ศ. 2563"
+          thai={
+            <>
+              วันอาทิตย์ที่ 1 พฤศจิกายน พ.ศ. 2563
+              <br />ณ นานาบีชรีสอร์ท หาดทุ่งวัวแล่น จังหวัดชุมพร
+            </>
+          }
           english={
             <>
               Sunday, the first of November
               <br />
               Two thousand and twenty
+              <br />
+              at Nana Beach Resort, Chumphon
             </>
           }
         />
-        <MultiLangCaption
+        <Box
+          sx={{
+            fontFamily: "english",
+            letterSpacing: "5px",
+            textAlign: "center",
+            my: 32,
+            p: {
+              display: "inline-block",
+              mr: "-5px",
+              mb: "4px",
+            },
+          }}
+        >
+          <p>THEME</p>
+          <Flex>
+            <ThemeColor color="#D5CFC9" />
+            <ThemeColor color="#869D83" />
+            <ThemeColor color="#5C7757" />
+          </Flex>
+        </Box>
+        <MultiLangSchedule
           small
           language={language}
-          thai={
-            <>
-              ณ นานาบีชรีสอร์ท หาดทุ่งวัวแล่น จังหวัดชุมพร
-              <br />
-              เวลา 11:30 น. (โต๊ะจีน)
-            </>
-          }
           english={
             <>
-              at Nana Beach Resort, Chumphon
+              07:09 Religious Ceremony
               <br />
-              at half after eleven in the morning (Chinese Banquet)
+              08:09 Marriage Ceremony
+              <br />
+              09:09 Water Blessing Ceremony
+              <br />
+              11:30 Lunch reception
+            </>
+          }
+          thai={
+            <>
+              เวลา 07:09 น. พระสงฆ์เจริญพระพุทธมนต์
+              <br />
+              เวลา 08:09 น. พิธีแลกแหวน และไหว้ญาติผู้ใหญ่
+              <br />
+              เวลา 09:09 น. พิธีหลั่งน้ำพระพุทธมนต์และประสาทพร
+              <br />
+              เวลา 11:30 น. ร่วมรับประทานอาหาร
             </>
           }
         />

@@ -101,6 +101,69 @@ export const MultiLangCaption = ({
     )}
   </Box>
 )
+export const MultiLangSchedule = ({
+  sx = {},
+  thai,
+  english,
+  small,
+  language,
+}) => (
+  <Box
+    as="div"
+    sx={{
+      my: 3,
+      fontFamily: "english",
+      fontSize: small ? "1rem" : "1.15rem",
+      fontWeight: 400,
+      textAlign: "left",
+      display: "flex",
+      "@media (max-width: 610px)": { display: "block" },
+      ...sx,
+    }}
+  >
+    {(!language || language === "thai") && (
+      <Box
+        as="p"
+        sx={{
+          fontFamily: "thai",
+          mr: !language && 16,
+          "@media (max-width: 610px)": {
+            display: "block",
+            mr: 0,
+            mb: !language && 8,
+          },
+        }}
+      >
+        {thai}
+      </Box>
+    )}
+    {(!language || language === "english") && (
+      <Box
+        as="p"
+        sx={{
+          fontFamily: "english",
+          color: language === "english" ? "black" : "grey",
+        }}
+      >
+        {english}
+      </Box>
+    )}
+  </Box>
+)
+
+const CIRCLE_SIZE = 25
+export const ThemeColor = ({ color }) => (
+  <Box
+    sx={{
+      width: CIRCLE_SIZE,
+      height: CIRCLE_SIZE,
+      backgroundColor: color,
+      borderRadius: "100000000px",
+      margin: 1,
+    }}
+  />
+)
+
 export const DateCaption = ({ sx = {}, ...props }) => (
   <Box
     as="p"
